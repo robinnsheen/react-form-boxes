@@ -10,6 +10,10 @@ function BoxList() {
     let newBox = {...box, id: uuid()};
     setBoxes([...boxes, newBox]);
   }
+  function removeBox(evt){
+    setBoxes(boxes=>
+      boxes.filter((box)=> box.id!==evt.target.id));
+  }
 
   return (
     <div>
@@ -17,9 +21,12 @@ function BoxList() {
       <div>
         {boxes.map(box =>
           <Box
+            key = {box.id}
             width={box.width}
             height={box.height}
-            backgroundColor={box.backgroundColor}/>)}
+            backgroundColor={box.backgroundColor}
+            removeBox={removeBox}/>)}
+
       </div>
     </div>
   )
